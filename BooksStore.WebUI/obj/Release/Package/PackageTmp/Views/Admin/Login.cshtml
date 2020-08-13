@@ -1,0 +1,36 @@
+﻿@model BooksStore.Domain.Entities.Admin
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 style="text-align:center">管理员登录</h2>
+<form action="Login" method="post">
+    <table class="table table-striped table-condensed table-bordered">
+        <tr>
+            <td style="text-align:right;padding:10px 30px 10px;font-size:18px;">用户名:</td>
+            <td>
+                <div class="form-group">
+                    <input type="text" name="adminName" value="" class="form-control" />
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:right;padding:10px 30px 10px;font-size:18px;">密码:</td>
+            <td>
+                <div class="form-group">
+                    <input type="password" name="pwd" value="" class="form-control" />
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align:center">
+                <div class="panel-footer">
+                    <input type="submit" value="登录" class="btn btn-primary" />
+                </div>
+            </td>
+        </tr>
+        @Html.ValidationSummary();
+    </table>
+</form>

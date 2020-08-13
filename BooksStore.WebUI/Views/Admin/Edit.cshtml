@@ -1,0 +1,47 @@
+﻿@model BooksStore.Domain.Entities.Product
+
+@{
+    ViewBag.Title = "Admin: 编辑 " + @Model.Name;
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="panel">
+    <div class="panel-heading">
+        <h3>@ViewBag.Title</h3>
+    </div>
+
+    @using (Html.BeginForm("Edit", "Admin")) {
+        <div class="panel-body">
+            @foreach (var property in ViewData.ModelMetadata.Properties) {
+               //得有id，要不然编辑也是创建操作
+                if (property.PropertyName == "ProductID")
+                {
+                    @Html.HiddenFor(x=>x.ProductID)
+                }
+                
+                if (property.PropertyName != "ProductID") {
+                    <div class="form-group">
+                        <label>@(property.DisplayName ?? property.PropertyName)</label>
+                        @if (property.PropertyName == "Description") {
+                            @Html.TextArea(property.PropertyName, null,
+                                new { @class = "form-control", rows = 5 })
+                        } else {
+                            @Html.TextBox(property.PropertyName, null,
+                                new { @class = "form-control" })
+                        }
+                        @Html.ValidationMessage(property.PropertyName)
+                    </div>
+                }
+            }
+        </div>
+
+        <div class="panel-footer">
+            <input type="submit" value="保存" class="btn btn-primary" />
+            @Html.ActionLink("返回到图书管理页面", "Index", new { page=1}, new
+       {
+           @class = "btn btn-default"
+       })
+        </div>
+    }
+</div>
+
